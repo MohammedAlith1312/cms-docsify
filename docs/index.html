@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: 'Docs',
+      // repo: '',
+      loadSidebar: '_nav.md',
+      requestHeaders: {
+        'cache-control': 'max-age=0',
+      },
+      plugins: [
+        function editPlugin(hook, vm) {
+          // GitHub config
+          var owner = 'MohammedAlith1312';
+          var repo = 'document-in-docsify';
+          var branch = 'main';
+          var docsPath = 'docs/';
+
+          // PagesCMS config — must point to the CONTENT repo (document-in-docsify), not the CMS app repo
+          var pagesCmsBase = 'https://pages-cms-ten-psi.vercel.app';
+          var pagesCmsOwner = 'MohammedAlith1312';
+          var pagesCmsRepo = 'document-in-docsify';
+          var pagesCmsCollection = 'pages'; // matches "name: pages" in .pages.yml
+
+          hook.beforeEach(function (html) {
+            var file = vm.route.file;
+            if (!file) return html;
+
+            // GitHub edit URL
+            var githubEditUrl = 'https://github.com/' + owner + '/' + repo + '/edit/' + branch + '/' + docsPath + file;
+
+            // PagesCMS edit URL — include docs/ folder prefix, encode slashes as %2F
+            var encodedFilePath = encodeURIComponent('docs/' + file);
+            var pagesCmsUrl = pagesCmsBase + '/' + pagesCmsOwner.toLowerCase() + '/' + pagesCmsRepo + '/' + branch
+              + '/collection/' + pagesCmsCollection + '/edit/' + encodedFilePath;
+
+            var editBar = '<div style="margin-bottom:1em; display:flex; gap:12px; font-size:14px;">'
+              // + '<a href="' + githubEditUrl + '" target="_blank" rel="noopener" title="Edit on GitHub">📝 Edit on GitHub</a>'
+              + '<a href="' + pagesCmsUrl + '" target="_blank" rel="noopener" title="Edit on Document">✏️ Edit on Document</a>'
+              + '</div>\n';
+
+            return editBar + html;
+          });
+        }
+      ],
+      // pagination: {
+      //   previousText: 'Previous',
+      //   nextText: 'Next',
+      //   crossChapter: true,
+      //   crossChapterText: true,
+      // },
+    }
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- Docsify Copy Code -->
+  <script src="https://unpkg.com/docsify-copy-code@2"></script>
+  <!-- Docsify Pagination -->
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <!-- GitHub Issue Feedback System -->
+  <script type="module" src="tb/tb-main.js"></script>
+  <!-- GitHub OAuth Auth -->
+  <script src="auth.js"></script>
+
+
+</body>
+
+</html>

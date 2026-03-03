@@ -1,0 +1,40 @@
+
+
+content:
+ 
+
+  # === REACT DOCUMENTATION COLLECTION ===
+
+    
+  
+  # ===Pages ===
+  - name: pages
+    label: React Docs
+    path: docs
+    type: collection
+    format:  yaml-frontmatter
+    filename: "{fields.slug}.md" # This allows files like simple-react-learn.json
+    fields:
+      - name: title
+        label: Document Title
+        type: string
+        
+
+      - name: slug
+        label: URL Slug
+        type: string
+      
+
+      - name: content
+        label: Full Page Content
+        type: rich-text # This gives you the entire page area for your docs
+  
+
+
+  
+
+          
+ 
+  
+
+   
